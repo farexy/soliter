@@ -1,0 +1,28 @@
+body{
+    background-color: limegreen;
+}
+
+.card{
+    width: 80px;
+    height: 120px;
+    position: absolute;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    border: 1px solid goldenrod;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.card img{
+    width: 80px;
+    height: 120px;
+}
+
+.freePlace{
+    position: absolute;
+    border: 1px solid grey;
+    border-radius: 10px;
+    width: 85px;
+    height: 125px;
+}
