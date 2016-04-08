@@ -68,6 +68,17 @@ class Set{
         return id.substring(1);
     }
 
+    static convertObjectListToElements(list){
+        var result = [];
+        for(var i = 0; i < list.length; i++){
+            result[i] = Set.getCardDivByIndex(list[i].index);
+        }
+        return result;
+    }
+    
+    static getCardDivByIndex(index){
+        return document.getElementById('c' + index);
+    }
     static compareCardsCollors(suit1, suit2){
         if((suit1 == cardSuitEnum.HEART || suit1 == cardSuitEnum.DIAMOND)
             && (suit2 == cardSuitEnum.DIAMOND || suit2 == cardSuitEnum.HEART))
@@ -135,6 +146,34 @@ class Field{
         var result = [];
         if(Field.popCardFromColl(idxColl) == Set.getCardByIndex(idxCard))
             result[0] = Field.popCardFromColl(idxColl);
+    }
+
+    static isCardAvailable(cardIndex){
+        var coll = this.cardColls[Field.getCollByCardIndex(cardIndex)]
+
+        if(coll[coll.length - 1].index == cardIndex)
+            return true;
+        else if(Field.getCardTail(cardIndex).length > 0)
+            return true;
+        else return false;
+    }
+
+    static getCardTail(cardIndex){
+        var coll = this.cardColls[Field.getCollByCardIndex(cardIndex)];
+        var tail = [];
+        var cardFound = false;
+
+        for(var i = 0; i < coll.length; i++ ){
+            if (i != coll.length - 1 && coll[i].index == cardIndex && coll[i].value - coll[i + 1].value == 1
+                && !Set.compareCardsCollors(coll[i].suit, coll[i - 1].suit) ) {
+                cardFound = true;
+            }
+
+            if(cardFound && coll[i - 1].value - coll[i].value == 1
+                && !Set.compareCardsCollors(coll[i].suit, coll[i - 1].suit))
+                    tail.push(coll[i]);
+        }
+        return tail;
     }
 
     static isCardSuitableForColl(cardIndex, collIndex){

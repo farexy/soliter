@@ -19,7 +19,7 @@ class View{
             for (var j = 0; j < cardColls[i].length; j++) {
                 var id = "c" + cardColls[i][j].index;
                 View.drawCard(id, left, top, j);
-                top += 35;
+                top += 32;
             }
             left += 110;
         }
